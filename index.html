@@ -1,0 +1,487 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>北京→云南 12天11晚路书 · 昆明·大理·丽江·香格里拉·西双版纳</title>
+<style>
+:root{
+  --bg:#F4F7F5; --tint:#EAF1EC; --surface:#FFFFFF;
+  --t1:#1E2D2B; --t2:#4A615C; --t3:#7A8F89;
+  --acc:#1F8A6C; --acc-h:#157A5E; --on:#FFFFFF;
+  --good:#0E7C3A; --warn:#B45309; --bad:#C62F1F;
+  --radius:16px; --btnr:999px; --bstr:10%;
+  --disp:-apple-system,'PingFang SC','Noto Sans SC',sans-serif;
+  --body:var(--disp);
+  --border:color-mix(in srgb,var(--t1) var(--bstr),transparent);
+  --card:var(--surface);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:auto}
+body{background:var(--bg);color:var(--t2);font-family:var(--body);line-height:1.65;font-size:15px}
+h1,h2,h3{color:var(--t1);line-height:1.3}
+/* 头图 */
+.hero{position:relative;width:100%;min-height:100svh;min-height:100vh;display:flex;align-items:flex-end;
+  background-image:linear-gradient(180deg,rgba(0,0,0,.05) 30%,rgba(0,0,0,.72) 100%),url("https://pixabay.com/get/gd6ee6509fa7b267308464956e855df5e763fca08dce5c97f3d4ce7542a1f788c562815dc69d52bcfc5c092661248064eb7ecc2708770b94268ce0dbd3de6ee9c_1280.jpg");
+  background-size:cover;background-position:center;color:#fff;padding:0 22px 40px}
+.hero .wrap{max-width:1060px;width:100%;margin:0 auto}
+.hero .eyebrow{display:inline-block;background:rgba(255,255,255,.16);border:1px solid rgba(255,255,255,.35);
+  padding:6px 16px;border-radius:999px;font-size:13px;margin-bottom:16px;backdrop-filter:blur(4px)}
+.hero h1{font-size:clamp(30px,7vw,56px);color:#fff;margin-bottom:10px;font-weight:800}
+.hero p.lead{font-size:clamp(15px,2.6vw,19px);color:#EAF3EF;max-width:640px;margin-bottom:22px}
+.hero .params{display:flex;flex-wrap:wrap;gap:10px}
+.hero .params .p{background:rgba(255,255,255,.14);border:1px solid rgba(255,255,255,.28);padding:8px 14px;border-radius:12px;font-size:13px;backdrop-filter:blur(3px)}
+.hero .src{position:absolute;bottom:6px;right:14px;font-size:11px;color:rgba(255,255,255,.6)}
+.hero .src a{color:rgba(255,255,255,.75)}
+/* 导航 */
+nav.top{position:sticky;top:0;z-index:50;background:rgba(255,255,255,.86);backdrop-filter:blur(10px);border-bottom:1px solid var(--border)}
+.nav-inner{max-width:1060px;margin:0 auto;padding:8px 16px}
+.nav-links{display:flex;gap:4px;overflow-x:auto;white-space:nowrap;-webkit-overflow-scrolling:touch}
+.nav-links a{flex:0 0 auto;text-decoration:none;color:var(--t2);font-size:13px;font-weight:600;padding:7px 12px;border-radius:999px;transition:.2s}
+.nav-links a.active{background:var(--acc);color:#fff}
+.nav-links a:not(.active):hover{background:var(--tint);color:var(--acc)}
+/* 主容器 */
+.wrap{max-width:1060px;margin:0 auto;padding:28px 16px 60px}
+/* 概览 */
+.overview{display:grid;grid-template-columns:1fr;gap:18px;margin-bottom:34px}
+@media(min-width:900px){.overview{grid-template-columns:1fr 1fr;align-items:start}}
+.genbox{background:var(--tint);border-radius:var(--radius);padding:18px}
+.genbox h3{margin-bottom:10px}
+.genbox .l{display:flex;gap:10px;margin:8px 0;align-items:baseline}
+.genbox .l b{color:var(--t1);flex:0 0 96px}
+.mapbig{margin-top:4px}
+.mapbig iframe{width:100%;height:330px;border:0;border-radius:14px}
+/* 高度区 */
+.altitude{background:linear-gradient(135deg,#FFF6E8,#FFF0DC);border:1px solid color-mix(in srgb,var(--warn) 22%,transparent);border-radius:var(--radius);padding:18px;margin-bottom:26px}
+.altitude h3{color:var(--warn);margin-bottom:8px}
+.pill{display:inline-block;background:#fff;border:1px solid var(--border);padding:5px 12px;border-radius:999px;font-size:13px;font-weight:600;color:var(--t1);margin:3px 4px 3px 0}
+.pill.warn{background:#FBEDE2;color:var(--warn);border-color:color-mix(in srgb,var(--warn) 30%,transparent)}
+.pill.good{background:#E5F4EA;color:var(--good)}
+.note{font-size:13px;color:var(--t2);margin-top:8px;background:rgba(255,255,255,.6);padding:10px 12px;border-radius:10px}
+/* 每日卡片 */
+.day{background:var(--card);border-radius:var(--radius);padding:20px;margin-bottom:26px;border:1px solid var(--border)}
+.dayhead{display:flex;align-items:center;gap:10px;margin-bottom:6px}
+.daynum{background:var(--acc);color:#fff;font-weight:700;padding:3px 12px;border-radius:999px;font-size:13px}
+.badge{background:var(--tint);color:var(--acc);font-weight:700;font-size:12px;padding:3px 10px;border-radius:999px}
+.daytitle{font-size:clamp(20px,4.4vw,27px);margin-bottom:6px}
+.metaline{display:flex;gap:8px;align-items:flex-start;color:var(--t1);font-weight:600;margin:5px 0}
+.metaline i{flex:0 0 auto;color:var(--acc);margin-top:4px}
+.mapwrap{margin:14px 0}
+.mapcap{font-size:12px;color:var(--t3);margin-bottom:5px}
+/* 景点折叠 */
+.spotbtn{display:inline-flex;align-items:center;gap:6px;background:var(--tint);color:var(--acc);border:1px solid var(--border);
+  padding:9px 16px;border-radius:999px;font-weight:700;cursor:pointer;font-size:14px;margin:6px 0;transition:.2s}
+.spotbtn:hover{background:var(--acc);color:#fff}
+.spot{display:none;background:var(--tint);border-radius:12px;padding:14px;margin:8px 0}
+.spot h4{color:var(--acc);margin-bottom:6px}
+.spot p{margin:5px 0;font-size:14px}
+.spot.open{display:block}
+/* 图片 */
+.imgs{margin:14px 0}
+.imgs figure{width:100%}
+.imgs img{width:100%;height:auto;display:block;border-radius:12px}
+.imgs small{display:block;margin-top:4px;font-size:11px;color:var(--t3)}
+.imgs small a{color:var(--acc)}
+/* 信息格 */
+.gride2{display:grid;grid-template-columns:1fr;gap:10px;margin:14px 0}
+@media(min-width:640px){.gride2{grid-template-columns:1fr 1fr}}
+.kv{background:var(--tint);border-radius:12px;padding:12px;font-size:13.5px}
+.kv b{display:block;color:var(--t1);margin-bottom:4px}
+.kv.warn{background:#FBEDE2;border:1px solid color-mix(in srgb,var(--warn) 25%,transparent)}
+.kv.warn b{color:var(--warn)}
+.kv.planb{background:#EAF2EF;border:1px solid color-mix(in srgb,var(--acc) 20%,transparent)}
+.kv.planb b{color:var(--acc)}
+.kv.wide{grid-column:1/-1}
+/* 一键导航 */
+.navbtn{display:block;width:100%;text-align:center;background:var(--acc);color:#fff;text-decoration:none;
+  padding:14px;border-radius:999px;font-weight:700;font-size:16px;transition:.2s;margin-top:6px}
+.navbtn:hover{background:var(--acc-h);color:#fff}
+/* 附录 */
+.appendix{background:var(--tint);border-radius:var(--radius);padding:22px;margin-top:10px}
+.appendix h3{margin-bottom:12px}
+.appendix ul{margin-left:18px}
+.appendix li{margin:7px 0;font-size:14px}
+.srcnote{font-size:12px;color:var(--t3);margin-top:14px;line-height:1.7}
+.ts{font-size:12px;color:var(--t3);text-align:center;margin:8px 0 0}
+@media (prefers-reduced-motion:reduce){*{transition:none!important}}
+</style>
+</head>
+<body>
+
+<div class="hero">
+  <div class="wrap">
+    <span class="eyebrow">云南 · 滇西北环线 + 西双版纳 · 12天11晚</span>
+    <h1>北京 → 云南 路书</h1>
+    <p class="lead">雪山、古城、高原湖泊与热带雨林一次集齐——昆明落地租车走滇西环线（大理·丽江·香格里拉），再飞版纳看湄公河夜景。每天 9 点后出发，酒店与美食直接排进每日行程。</p>
+    <div class="params">
+      <span class="p">总里程：约 1750 km（含滇西北自驾环线约 780km）</span>
+      <span class="p">总天数：12 天 11 晚（可缩至 10 天 / 延至 15 天）</span>
+      <span class="p">最佳季节：3-5 月春、9-11 月秋</span>
+      <span class="p">预算：¥6000–8500 / 人（含往返大交通）</span>
+      <span class="p">最高海拔：4506m（玉龙雪山大索道）</span>
+    </div>
+  </div>
+  <div class="src"><small>图源 <a href="https://pixabay.com/photos/dali-erhai-lake-yunnan-landscape-2064559/" target="_blank">4537668@Pixabay</a></small></div>
+</div>
+
+<nav class="top"><div class="nav-inner"><div class="nav-links"><a href="#day1">D1</a><a href="#day2">D2</a><a href="#day3">D3</a><a href="#day4">D4</a><a href="#day5">D5</a><a href="#day6">D6</a><a href="#day7">D7</a><a href="#day8">D8</a><a href="#day9">D9</a><a href="#day10">D10</a><a href="#day11">D11</a><a href="#day12">D12</a></div></div></nav>
+
+<div class="wrap">
+
+  <div class="overview">
+    <div class="genbox">
+      <h3>行前决策 · 关键参数</h3>
+      <div class="l"><b>一句话定位</b>经典滇西北 + 西双版纳全景线：适合首次进滇、10 天以上假期、喜爱雪山古城与民族风情的旅行者。</div>
+      <div class="l"><b>全程交通</b>北京往返昆明/版纳：✈️ 飞机（周中约¥460–800，飞行约3.5h）或 🚄 高铁 D939（二等座¥851.5，约11h41m）；省内滇西北走当地自驾环线（落地租车，普通轿车即可）。</div>
+      <div class="l"><b>累计爬升</b>大理→香格里拉段累计爬升约 1300m，虎香公路落差约 800m。</div>
+      <div class="l"><b>路况</b>昆明-大理-丽江全程高速/柏油，丽江-香格里拉 G214 柏油（弯道多）；虎香公路已油路，雨季防落石。</div>
+      <div class="l"><b>装备</b>防晒霜、墨镜、便携氧气瓶、薄羽绒/抓绒（香格里拉夜 5-8℃）、红景天（提前3-5天）、驱蚊液（版纳）、身份证+学生证。</div>
+      <div class="l"><b>门票预约</b>⚠️ 玉龙雪山必须提前7天在官方小程序抢票；石林/普达措/松赞林寺均需提前1-3天预约。一键复核：<a href="https://www.amap.com/" target="_blank" rel="noopener" style="color:var(--acc)">高德地图</a>。</div>
+    </div>
+    <div class="genbox">
+      <h3>全程路线示意</h3>
+      <div class="mapbig"><iframe loading="lazy" src="https://uri.amap.com/marker?position=100.17,25.68&name=大理（滇西环线中心）" style="width:100%;height:330px;border:0;border-radius:14px;"></iframe></div>
+    </div>
+  </div>
+
+  
+<div class="altitude">
+  <h3>海拔与高反提示（高原线路专项）</h3>
+  <p><span class="pill">昆明 1890m</span><span class="pill">大理 1976m</span><span class="pill">丽江 2418m</span><span class="pill warn">玉龙雪山 4506m↑</span><span class="pill warn">香格里拉 3280m</span><span class="pill good">景洪 553m</span></p>
+  <p class="note">⚠️ 真实海拔剖面数据待接入，请参考官方资料核验。丽江、玉龙雪山、香格里拉为高海拔段：请<b>缓上慢走、避免急速升高</b>，提前3-5天服用红景天，随身携带便携氧气瓶；一旦头痛剧烈/呕吐立即下撤到低海拔（建议回丽江）。西双版纳为低海拔热带，温差大，注意增减衣物。</p>
+</div>
+
+
+  
+<section class="day" id="day1">
+  <div class="dayhead">
+    <span class="daynum">Day 1</span>
+    <span class="badge">🚄 飞机+接机</span>
+  </div>
+  <h2 class="daytitle">北京 → 昆明 · 滇池初遇</h2>
+  <div class="metaline"><i data-lucide="clock"></i>09:00 北京大兴 → 12:50 昆明长水（直飞约3.5h，经济舱约¥460–800）</div>
+  <div class="metaline"><i data-lucide="map-pin"></i>北京大兴机场 → 昆明长水机场 → 市区南屏街（地铁6号线+换乘约1h）</div>
+  <div class="mapwrap"><div class="mapcap">📍 高德地图 · 昆明南屏街</div><iframe loading="lazy" src="https://uri.amap.com/marker?position=102.70,25.04&name=昆明南屏街" style="width:100%;height:300px;border:0;border-radius:14px;"></iframe></div>
+  <button class="spotbtn" onclick="toggleSpot(this)">展开详细攻略</button><div class="spot"><h4>滇池·海埂大坝</h4><p><b>深度看点：</b>冬季红嘴鸥翔集（11月-次年3月），落日时分海天一色；滇池是云贵高原最大淡水湖，水质近年持续改善。</p><p><b>📷 拍照打卡点：</b>海埂大坝日落剪影、喂鸥抓拍（11月起红嘴鸥最盛）</p><p><b>🍜 周边美食：</b>傍晚回市区吃汽锅鸡+鲜花饼；南强街夜市烤乳扇</p><p><b>🗺 游览动线：</b>长水机场→市区入住→下午海埂大坝看落日→夜逛南强街</p></div>
+  <div class="imgs"><figure><img src="https://pixabay.com/get/g599f2d511bf64024c62f48b1efd0a0914cb77a9e19981e5f3009aec2416b553f7933430a4129b29e985aae5da74d7f68b1acb5250d8a845d85c16ab04a7005ac_1280.jpg" alt="昆明滇池红嘴鸥" loading="lazy" width="1000"><small>图源 <a href="https://pixabay.com/photos/yunnan-dianchi-black-headed-gull-2102671/" target="_blank">C-land@Pixabay</a></small></figure></div>
+  <div class="gride2">
+    <div class="kv"><b>路况</b>落地后市内以地铁/打车为主，昆明公交地铁便利</div>
+    <div class="kv"><b>补给</b>长水机场-市内地铁6号线；市区便利店/药店密集</div>
+    <div class="kv warn"><b>⚠️ 坑点</b>周中机票比周末便宜15%-30%，避开19:00后晚班机；廉航不含托运行李</div>
+    <div class="kv planb"><b>🔀 Plan B</b>若航班延误改签到，可改高铁D939（20:17发车次日10:58到）；落地后若高反轻微先休息半天</div>
+    <div class="kv wide">🏨 全季酒店·昆明南屏街店（约¥320–380/晚）｜备选：汉庭优佳、城市便捷，均300–400档，近地铁</div>
+    <div class="kv wide">🍜 晚餐：桥香园/建新园过桥米线（¥25–40/人）+ 汽锅鸡；夜宵可逛南强街巷吃烧饵块、鲜花饼</div>
+  </div>
+  <a class="navbtn" target="_blank" rel="noopener" href="https://uri.amap.com/marker?position=102.70,25.04&name=昆明南屏街">一键导航</a>
+</section>
+
+<section class="day" id="day2">
+  <div class="dayhead">
+    <span class="daynum">Day 2</span>
+    <span class="badge">🚗 当地自驾一日</span>
+  </div>
+  <h2 class="daytitle">昆明 → 石林 · 喀斯特奇观</h2>
+  <div class="metaline"><i data-lucide="clock"></i>09:00 昆明出发 → 约10:15 抵达石林（自驾约80km/1.2h）</div>
+  <div class="metaline"><i data-lucide="map-pin"></i>昆明 → G78高速 → 石林景区 → 傍晚返昆明</div>
+  <div class="mapwrap"><div class="mapcap">📍 高德地图 · 石林风景区</div><iframe loading="lazy" src="https://uri.amap.com/marker?position=103.27,24.82&name=石林风景区" style="width:100%;height:300px;border:0;border-radius:14px;"></iframe></div>
+  <button class="spotbtn" onclick="toggleSpot(this)">展开详细攻略</button><div class="spot"><h4>石林风景区</h4><p><b>深度看点：</b>世界自然遗产、世界地质公园，喀斯特石林发育最典型之地；剑峰池、阿诗玛化身石为必打卡。</p><p><b>📷 拍照打卡点：</b>大石林“剑峰池”倒影、阿诗玛石像、“一线天”狭缝</p><p><b>🍜 周边美食：</b>彝族风味火塘烤肉、坨坨肉</p><p><b>🗺 游览动线：</b>昆明→石林（自驾1.2h）→大小石林徒步→剑峰池→返昆明晚餐</p></div>
+  <div class="imgs"><figure><img src="https://pixabay.com/get/g7deade482b380f1aded552218e0b188906bd0292954848309d41675f3c10bdf53e0c4076015ffa709c0ddbc8a70a5489bded623469597154713e926f36070330_1280.jpg" alt="昆明石林喀斯特地貌" loading="lazy" width="1000"><small>图源 <a href="https://pixabay.com/photos/stone-forest-shilin-rock-formations-6625538/" target="_blank">liuguangxi@Pixabay</a></small></figure></div>
+  <div class="gride2">
+    <div class="kv"><b>路况</b>全程高速柏油路，路况好；景区内需步行+环保车（¥25）</div>
+    <div class="kv"><b>补给</b>石林景区门口有餐饮补给点、加油站；自带水</div>
+    <div class="kv warn"><b>⚠️ 坑点</b>石林门票¥130（学生半价，60岁以上免费），旺季提前1-7天在“石林旅游”公众号预约</div>
+    <div class="kv planb"><b>🔀 Plan B</b>遇雨天改昆明市区游（翠湖/云南民族村）；时间紧可砍掉石林改斗南花市</div>
+    <div class="kv wide">🏨 续住昆明市区（全季·南屏街 ¥320–380），免搬行李</div>
+    <div class="kv wide">🍜 午餐景区外彝族风味（火塘烤肉/坨坨肉，人均¥60–80）；晚餐回市区吃野生菌火锅（人均¥100–150，秋季菌子季正盛）</div>
+  </div>
+  <a class="navbtn" target="_blank" rel="noopener" href="https://uri.amap.com/marker?position=103.27,24.82&name=石林风景区">一键导航</a>
+</section>
+
+<section class="day" id="day3">
+  <div class="dayhead">
+    <span class="daynum">Day 3</span>
+    <span class="badge">🚄 动车</span>
+  </div>
+  <h2 class="daytitle">昆明 → 大理 · 古城与三塔</h2>
+  <div class="metaline"><i data-lucide="clock"></i>09:00 昆明南 → 约11:00 大理（动车约2h，二等座约¥114–145）</div>
+  <div class="metaline"><i data-lucide="map-pin"></i>昆明南站 → 大理站 → 大理古城（打车/公交约40min）</div>
+  <div class="mapwrap"><div class="mapcap">📍 高德地图 · 大理古城</div><iframe loading="lazy" src="https://uri.amap.com/marker?position=100.17,25.68&name=大理古城" style="width:100%;height:300px;border:0;border-radius:14px;"></iframe></div>
+  <button class="spotbtn" onclick="toggleSpot(this)">展开详细攻略</button><div class="spot"><h4>崇圣寺三塔</h4><p><b>深度看点：</b>大理标志，南诏国皇家寺院遗址；主塔千寻塔69米，与苍山洱海同框最出片。</p><p><b>📷 拍照打卡点：</b>三塔倒影池（正面水面）、苍山为背景的塔群</p><p><b>🍜 周边美食：</b>古城内砂锅鱼、烤乳扇</p><p><b>🗺 游览动线：</b>大理站→古城入住→下午崇圣寺三塔→傍晚古城逛人民路/洋人街</p></div>
+  <div class="imgs"><figure><img src="https://pixabay.com/get/g38f5d0b68a9fed9a855c91b12b4221a1d6a7549004c2794ff1167ee543b0bce5b163c9221f66ca082113e0cfda877a336695ad9ddb0768c9c1d281ad5dcec225_1280.jpg" alt="大理崇圣寺三塔" loading="lazy" width="1000"><small>图源 <a href="https://pixabay.com/photos/religion-the-three-towers-dali-4943804/" target="_blank">多尼的棍仔糖@Pixabay</a></small></figure></div>
+  <div class="gride2">
+    <div class="kv"><b>路况</b>昆明-大理高速已通动车，班次密集；古城内步行</div>
+    <div class="kv"><b>补给</b>大理站-古城有公交/网约车；古城内餐饮补给充足</div>
+    <div class="kv warn"><b>⚠️ 坑点</b>动车票提前15天开售；大理古城、洱海免费，崇圣寺三塔收费（约¥121，待确认，请出行前核验）</div>
+    <div class="kv planb"><b>🔀 Plan B</b>动车无票可改G字头高铁或长途大巴（约4h）；到得早可先登古城墙看苍山</div>
+    <div class="kv wide">🏨 大理古城内/才村码头民宿（约¥300–400/晚），近洱海可看日出｜备选：全季、亚朵</div>
+    <div class="kv wide">🍜 晚餐：白族砂锅鱼（人均¥60–80）+ 烤乳扇（¥5–8）；古城人民路小吃</div>
+  </div>
+  <a class="navbtn" target="_blank" rel="noopener" href="https://uri.amap.com/marker?position=100.17,25.68&name=大理古城">一键导航</a>
+</section>
+
+<section class="day" id="day4">
+  <div class="dayhead">
+    <span class="daynum">Day 4</span>
+    <span class="badge">🚗 当地自驾环湖</span>
+  </div>
+  <h2 class="daytitle">环洱海一日 · 喜洲·双廊</h2>
+  <div class="metaline"><i data-lucide="clock"></i>09:00 大理出发 → 环洱海约120km/全天（租车约¥100–300/天）</div>
+  <div class="metaline"><i data-lucide="map-pin"></i>大理古城 → 喜洲古镇 → 磻溪S弯 → 双廊古镇 → 理想邦 → 返古城</div>
+  <div class="mapwrap"><div class="mapcap">📍 高德地图 · 双廊古镇</div><iframe loading="lazy" src="https://uri.amap.com/marker?position=100.13,25.88&name=双廊古镇" style="width:100%;height:300px;border:0;border-radius:14px;"></iframe></div>
+  <button class="spotbtn" onclick="toggleSpot(this)">展开详细攻略</button><div class="spot"><h4>洱海·环湖</h4><p><b>深度看点：</b>苍山十九峰倒映在碧蓝洱海，喜洲白族民居、双廊古镇、磻溪S弯网红机位。</p><p><b>📷 拍照打卡点：</b>喜洲稻田、双廊临海栈道、磻溪S弯、“理想邦”建筑</p><p><b>🍜 周边美食：</b>喜洲粑粑、乳扇、白族砂锅鱼</p><p><b>🗺 游览动线：</b>古城→喜洲（1h）→磻溪→双廊（午餐）→理想邦→返古城</p></div>
+  <div class="imgs"><figure><img src="https://pixabay.com/get/g5d795c56cc3a104858d4c4bd8d040f3a7712cb502ad9cbac8c5408bdb8996e08f3a8af62e6d1ff6823d6370388abcea3a4f769ebb2abcaa9b280c567ffe70cab_1280.jpg" alt="大理洱海" loading="lazy" width="1000"><small>图源 <a href="https://pixabay.com/photos/dali-erhai-lake-yunnan-landscape-2064559/" target="_blank">4537668@Pixabay</a></small></figure></div>
+  <div class="gride2">
+    <div class="kv"><b>路况</b>环洱海有生态廊道（机动车部分受限），西线龙龛/磻溪段骑行+东线自驾</div>
+    <div class="kv"><b>补给</b>喜洲、双廊镇上餐饮补给充足；油站在大理市区</div>
+    <div class="kv warn"><b>⚠️ 坑点</b>洱海生态廊道部分路段禁止机动车，需换骑行/电瓶车；冬季紫外线强注意防晒</div>
+    <div class="kv planb"><b>🔀 Plan B</b>下雨可改大理古城+天龙八部影视城；环湖累了可跳过大理石湾</div>
+    <div class="kv wide">🏨 续住大理（才村码头民宿 ¥300–400）</div>
+    <div class="kv wide">🍜 午餐喜洲破酥粑粑（¥5–10）+ 凉粉；晚餐古城白族土八碗</div>
+  </div>
+  <a class="navbtn" target="_blank" rel="noopener" href="https://uri.amap.com/marker?position=100.13,25.88&name=双廊古镇">一键导航</a>
+</section>
+
+<section class="day" id="day5">
+  <div class="dayhead">
+    <span class="daynum">Day 5</span>
+    <span class="badge">🚗 当地自驾/动车</span>
+  </div>
+  <h2 class="daytitle">大理 → 丽江 · 古城夜</h2>
+  <div class="metaline"><i data-lucide="clock"></i>09:00 大理出发 → 约11:00 丽江（自驾约180km/2h 或 动车约1.5h）</div>
+  <div class="metaline"><i data-lucide="map-pin"></i>大理 → 大丽高速 → 丽江古城 → 束河古镇</div>
+  <div class="mapwrap"><div class="mapcap">📍 高德地图 · 丽江古城</div><iframe loading="lazy" src="https://uri.amap.com/marker?position=100.23,26.87&name=丽江古城" style="width:100%;height:300px;border:0;border-radius:14px;"></iframe></div>
+  <button class="spotbtn" onclick="toggleSpot(this)">展开详细攻略</button><div class="spot"><h4>丽江古城</h4><p><b>深度看点：</b>世界文化遗产，纳西族东巴文化中心；大水车、四方街、木府、酒吧街夜生活。</p><p><b>📷 拍照打卡点：</b>大水车+雪山倒影、四方街、狮子山万古楼俯瞰古城</p><p><b>🍜 周边美食：</b>腊排骨、纳西烤鱼、鸡豆凉粉、丽江粑粑</p><p><b>🗺 游览动线：</b>古城入住→四方街→木府（¥40）→黑龙潭→晚上酒吧街</p></div>
+  <div class="imgs"><figure><img src="https://pixabay.com/get/g3a68389e5b530eef67e84c3a1a4c9254c9e55c512e0286811cd1d0cbcf8311af8b943c1a021af9c8e7d5756017605aa65355119fdf10fef0182e3e62ed20e4c9_1280.jpg" alt="丽江古城夜景" loading="lazy" width="1000"><small>图源 <a href="https://pixabay.com/photos/chinese-city-cityscape-culture-3801878/" target="_blank">jameswheeler@Pixabay</a></small></figure></div>
+  <div class="gride2">
+    <div class="kv"><b>路况</b>大理-丽江高速柏油路，路况好；丽江古城内步行</div>
+    <div class="kv"><b>补给</b>丽江市区加油站密集；古城内餐饮、便利店充足</div>
+    <div class="kv warn"><b>⚠️ 坑点</b>丽江古城免费但需刷身份证登记；旺季古城人流量大</div>
+    <div class="kv planb"><b>🔀 Plan B</b>自驾车多可改动车；到丽江早可先逛黑龙潭（免费，可看玉龙雪山倒影）</div>
+    <div class="kv wide">🏨 丽江古城边缘全季/亚朵（约¥320–400/晚），近停车场免拖箱爬坡｜备选古城内民宿</div>
+    <div class="kv wide">🍜 晚餐：腊排骨火锅（人均¥60–80）+ 鸡豆凉粉（¥8–12）；酒吧街可小坐</div>
+  </div>
+  <a class="navbtn" target="_blank" rel="noopener" href="https://uri.amap.com/marker?position=100.23,26.87&name=丽江古城">一键导航</a>
+</section>
+
+<section class="day" id="day6">
+  <div class="dayhead">
+    <span class="daynum">Day 6</span>
+    <span class="badge">🚗 当地自驾+索道</span>
+  </div>
+  <h2 class="daytitle">玉龙雪山一日 · 蓝月谷</h2>
+  <div class="metaline"><i data-lucide="clock"></i>09:00 丽江出发 → 约09:50 抵达玉龙雪山（自驾约40km/1h）</div>
+  <div class="metaline"><i data-lucide="map-pin"></i>丽江 → 玉龙雪山景区 → 大索道/云杉坪 → 蓝月谷 → 返丽江</div>
+  <div class="mapwrap"><div class="mapcap">📍 高德地图 · 玉龙雪山</div><iframe loading="lazy" src="https://uri.amap.com/marker?position=100.20,27.12&name=玉龙雪山" style="width:100%;height:300px;border:0;border-radius:14px;"></iframe></div>
+  <button class="spotbtn" onclick="toggleSpot(this)">展开详细攻略</button><div class="spot"><h4>玉龙雪山·蓝月谷</h4><p><b>深度看点：</b>海拔5596米的北半球最近赤道雪山；大索道至4506m观景台，蓝月谷湖水如翡翠。</p><p><b>📷 拍照打卡点：</b>蓝月谷湖面、4506m海拔碑、云杉坪高山草甸</p><p><b>🍜 周边美食：</b>腊排骨、牦牛肉</p><p><b>🗺 游览动线：</b>丽江→景区（1h）→环保车→大索道/云杉坪→蓝月谷→返丽江</p></div>
+  <div class="imgs"><figure><img src="https://pixabay.com/get/ga6f6f134f8f3ca81a9dbe74bf81bc0417b18f92af18547eb93ca43d409b6fa8a336fa38affb77f14d26e99e8fd580f85bcafc86b21174170828f85bb013e7c62_1280.jpg" alt="玉龙雪山蓝月谷" loading="lazy" width="1000"><small>图源 <a href="https://pixabay.com/photos/mountain-peak-landscape-8070188/" target="_blank">we-o_rd35vacfthjzxteky@Pixabay</a></small></figure></div>
+  <div class="gride2">
+    <div class="kv"><b>路况</b>进山道路柏油，山区弯道多；索道站需环保车接驳</div>
+    <div class="kv"><b>补给</b>景区内有环保车、餐吧；山上寒冷需租羽绒服（¥50左右）</div>
+    <div class="kv warn"><b>⚠️ 坑点</b>⚠️ 玉龙雪山无预约不入园！门票¥100，大索道¥140另算；必须提前7天在“丽江旅游集团/玉龙雪山服务”小程序抢票，现场不售票</div>
+    <div class="kv planb"><b>🔀 Plan B</b>抢不到大索道改云杉坪/牦牛坪索道（海拔更低、适合高反人群）；大索道停运改蓝月谷+甘海子+印象丽江</div>
+    <div class="kv wide">🏨 续住丽江（全季/亚朵 ¥320–400）</div>
+    <div class="kv wide">🍜 山下甘海子午餐简餐；晚上回古城吃纳西烤鱼+丽江粑粑</div>
+  </div>
+  <a class="navbtn" target="_blank" rel="noopener" href="https://uri.amap.com/marker?position=100.20,27.12&name=玉龙雪山">一键导航</a>
+</section>
+
+<section class="day" id="day7">
+  <div class="dayhead">
+    <span class="daynum">Day 7</span>
+    <span class="badge">🚗 当地自驾</span>
+  </div>
+  <h2 class="daytitle">丽江 → 香格里拉 · 藏地秘境</h2>
+  <div class="metaline"><i data-lucide="clock"></i>09:00 丽江出发 → 约11:30 抵达香格里拉（自驾约180km/2.5h，或动车约1.3h）</div>
+  <div class="metaline"><i data-lucide="map-pin"></i>丽江 → G214国道/虎香公路 → 独克宗古城 → 松赞林寺</div>
+  <div class="mapwrap"><div class="mapcap">📍 高德地图 · 香格里拉独克宗古城</div><iframe loading="lazy" src="https://uri.amap.com/marker?position=99.70,27.82&name=香格里拉独克宗古城" style="width:100%;height:300px;border:0;border-radius:14px;"></iframe></div>
+  <button class="spotbtn" onclick="toggleSpot(this)">展开详细攻略</button><div class="spot"><h4>松赞林寺（噶丹·松赞林）</h4><p><b>深度看点：</b>云南最大藏传佛教格鲁派寺院，被誉为“小布达拉宫”；门票¥90，提前1天预约，早晨光线最佳。</p><p><b>📷 拍照打卡点：</b>寺前拉姆央措湖倒影、金顶、僧人红衣点缀</p><p><b>🍜 周边美食：</b>牦牛肉、酥油茶、糌粑</p><p><b>🗺 游览动线：</b>丽江→香格里拉（2.5h）→独克宗古城（转经筒）→松赞林寺→夜逛古城</p></div>
+  <div class="imgs"><figure><img src="https://pixabay.com/get/gb42f8e89c0ca9da308cd92c415b3c6152aea271ebf77e641085e83eba44750bb2035cb4c16ad719dd1784b4f8573e292f1ab8c4e655a102f518808122fcc51a3_1280.jpg" alt="香格里拉松赞林寺" loading="lazy" width="1000"><small>图源 <a href="https://pixabay.com/photos/shangri-la-temple-b-building-5041431/" target="_blank">Zuper_Dragon@Pixabay</a></small></figure></div>
+  <div class="gride2">
+    <div class="kv"><b>路况</b>G214柏油路，虎香公路段弯道多需控速30km/h以内，雨季防落石</div>
+    <div class="kv"><b>补给</b>沿途加油站间隔较远（约50-80km），建议满油出发；镇上补给充足</div>
+    <div class="kv warn"><b>⚠️ 坑点</b>海拔从丽江2418m骤升至香格里拉3280m，易高反，当天慢走别剧烈运动</div>
+    <div class="kv planb"><b>🔀 Plan B</b>怕高反可改香格里拉一日往返不过夜；动车更舒适（若开通）</div>
+    <div class="kv wide">🏨 独克宗古城周边连锁/客栈（约¥300–400/晚），含供氧设施优先</div>
+    <div class="kv wide">🍜 晚餐：牦牛肉火锅（人均¥80–100）+ 酥油茶 + 青稞饼；藏红花酸奶</div>
+  </div>
+  <a class="navbtn" target="_blank" rel="noopener" href="https://uri.amap.com/marker?position=99.70,27.82&name=香格里拉独克宗古城">一键导航</a>
+</section>
+
+<section class="day" id="day8">
+  <div class="dayhead">
+    <span class="daynum">Day 8</span>
+    <span class="badge">🚗 当地自驾/包车</span>
+  </div>
+  <h2 class="daytitle">普达措国家公园一日</h2>
+  <div class="metaline"><i data-lucide="clock"></i>09:00 香格里拉出发 → 约09:40 抵达普达措（自驾/包车约22km/40min）</div>
+  <div class="metaline"><i data-lucide="map-pin"></i>香格里拉 → 普达措国家公园（属都湖/碧塔海）→ 返香格里拉</div>
+  <div class="mapwrap"><div class="mapcap">📍 高德地图 · 普达措国家公园</div><iframe loading="lazy" src="https://uri.amap.com/marker?position=99.94,27.85&name=普达措国家公园" style="width:100%;height:300px;border:0;border-radius:14px;"></iframe></div>
+  <button class="spotbtn" onclick="toggleSpot(this)">展开详细攻略</button><div class="spot"><h4>普达措国家公园</h4><p><b>深度看点：</b>中国第一个国家公园，属都湖、碧塔海高山湖泊+原始森林+草甸，秋季彩林通透。</p><p><b>📷 拍照打卡点：</b>属都湖栈道、湖面倒影、草甸牦牛群</p><p><b>🍜 周边美食：</b>牦牛肉包子、青稞饼、酥油茶</p><p><b>🗺 游览动线：</b>香格里拉→普达措（40min）→属都湖徒步→碧塔海→返程</p></div>
+  <div class="imgs"><figure><img src="https://pixabay.com/get/g9c0ee069a3234c08114d8826ae520f6bd18191e21df8ca92a8610d93caf40d9891ea497e6818f7f155777a503655bfb18ae3db22b8160b6bce1cab5686f7216b_1280.jpg" alt="热带雨林" loading="lazy" width="1000"><small>图源 <a href="https://pixabay.com/photos/forest-jungle-tropical-green-6761846/" target="_blank">hasogr@Pixabay</a></small></figure></div>
+  <div class="gride2">
+    <div class="kv"><b>路况</b>柏油路，山路弯道多需谨慎；公园内步行栈道+环保车</div>
+    <div class="kv"><b>补给</b>景区门口有餐吧、氧气售卖；园区内需自备干粮</div>
+    <div class="kv warn"><b>⚠️ 坑点</b>门票¥138（含¥70游览车+¥68门票），提前1-3天在“普达措国家公园”公众号预约，分上下午场、迟到作废</div>
+    <div class="kv planb"><b>🔀 Plan B</b>高反明显可改纳帕海草原（免费）+松赞林寺深度游；包车往返约¥300–400</div>
+    <div class="kv wide">🏨 续住香格里拉（独克宗古城 ¥300–400，供氧房）</div>
+    <div class="kv wide">🍜 午餐景区简餐/自带；晚餐藏式青稞面+牦牛肉包子</div>
+  </div>
+  <a class="navbtn" target="_blank" rel="noopener" href="https://uri.amap.com/marker?position=99.94,27.85&name=普达措国家公园">一键导航</a>
+</section>
+
+<section class="day" id="day9">
+  <div class="dayhead">
+    <span class="daynum">Day 9</span>
+    <span class="badge">🚗 自驾返程</span>
+  </div>
+  <h2 class="daytitle">香格里拉 → 丽江 · 慢逛束河</h2>
+  <div class="metaline"><i data-lucide="clock"></i>09:00 香格里拉出发 → 约11:30 返回丽江（自驾约180km/2.5h）</div>
+  <div class="metaline"><i data-lucide="map-pin"></i>香格里拉 → G214 → 丽江 → 束河古镇/黑龙潭</div>
+  <div class="mapwrap"><div class="mapcap">📍 高德地图 · 束河古镇</div><iframe loading="lazy" src="https://uri.amap.com/marker?position=100.23,26.93&name=束河古镇" style="width:100%;height:300px;border:0;border-radius:14px;"></iframe></div>
+  <button class="spotbtn" onclick="toggleSpot(this)">展开详细攻略</button><div class="spot"><h4>束河古镇·黑龙潭</h4><p><b>深度看点：</b>束河比丽江古城更安静古朴；黑龙潭公园（免费）可看玉龙雪山倒影。</p><p><b>📷 拍照打卡点：</b>黑龙潭雪山倒影、束河九鼎龙潭、青龙桥</p><p><b>🍜 周边美食：</b>虹鳟三文鱼、纳西小吃</p><p><b>🗺 游览动线：</b>香格里拉→丽江（2.5h）→黑龙潭→束河古镇慢逛</p></div>
+  <div class="imgs"><figure><img src="https://pixabay.com/get/g3a68389e5b530eef67e84c3a1a4c9254c9e55c512e0286811cd1d0cbcf8311af8b943c1a021af9c8e7d5756017605aa65355119fdf10fef0182e3e62ed20e4c9_1280.jpg" alt="丽江古城夜景" loading="lazy" width="1000"><small>图源 <a href="https://pixabay.com/photos/chinese-city-cityscape-culture-3801878/" target="_blank">jameswheeler@Pixabay</a></small></figure></div>
+  <div class="gride2">
+    <div class="kv"><b>路况</b>返程同G214，弯道多控速；冬季清晨可能有霜冻慢行</div>
+    <div class="kv"><b>补给</b>丽江市区补给充足；束河古镇餐饮多</div>
+    <div class="kv warn"><b>⚠️ 坑点</b>返程属高海拔下山，注意刹车热衰减；高原段睡眠不足易疲劳</div>
+    <div class="kv planb"><b>🔀 Plan B</b>时间紧可香格里拉直飞昆明（约1h）；体力好可加虎跳峡半日</div>
+    <div class="kv wide">🏨 丽江束河/古城边缘酒店（约¥300–400/晚）</div>
+    <div class="kv wide">🍜 午餐束河三文鱼（淡水虹鳟，人均¥70–100）；晚餐丽江腊排骨</div>
+  </div>
+  <a class="navbtn" target="_blank" rel="noopener" href="https://uri.amap.com/marker?position=100.23,26.93&name=束河古镇">一键导航</a>
+</section>
+
+<section class="day" id="day10">
+  <div class="dayhead">
+    <span class="daynum">Day 10</span>
+    <span class="badge">🚄 动车+飞机</span>
+  </div>
+  <h2 class="daytitle">丽江 → 昆明 → 西双版纳</h2>
+  <div class="metaline"><i data-lucide="clock"></i>09:00 丽江 → 约12:30 昆明（动车约3.5h）→ 约15:30 昆明飞西双版纳（约1h，¥300–600）</div>
+  <div class="metaline"><i data-lucide="map-pin"></i>丽江 → 昆明南 → 昆明长水 → 景洪嘎洒机场 → 告庄西双景</div>
+  <div class="mapwrap"><div class="mapcap">📍 高德地图 · 西双版纳告庄西双景</div><iframe loading="lazy" src="https://uri.amap.com/marker?position=100.82,22.03&name=西双版纳告庄西双景" style="width:100%;height:300px;border:0;border-radius:14px;"></iframe></div>
+  <button class="spotbtn" onclick="toggleSpot(this)">展开详细攻略</button><div class="spot"><h4>告庄西双景·星光夜市</h4><p><b>深度看点：</b>湄公河畔东南亚风情夜市，大金塔璀璨夜景，傣族与东南亚美食汇聚。</p><p><b>📷 拍照打卡点：</b>大金塔前广场、湄公河岸、夜市摊档灯光</p><p><b>🍜 周边美食：</b>手抓饭、香茅草烤鱼、舂鸡脚、热带水果</p><p><b>🗺 游览动线：</b>丽江动车→昆明→飞版纳→告庄入住→星光夜市夜游</p></div>
+  <div class="imgs"><figure><img src="https://images.pexels.com/photos/14441379/pexels-photo-14441379.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="西双版纳告庄夜市" loading="lazy" width="1000"><small>图源 <a href="https://www.pexels.com/photo/illuminated-tower-in-city-in-asia-14441379/" target="_blank">Nshcvks Hxjsg@Pexels</a></small></figure></div>
+  <div class="gride2">
+    <div class="kv"><b>路况</b>昆明-版纳可飞机（1h）或高铁（约3h）；景洪市内打车/电瓶车</div>
+    <div class="kv"><b>补给</b>昆明南-长水有机场地铁；版纳机场-市区约20min</div>
+    <div class="kv warn"><b>⚠️ 坑点</b>版纳是低海拔（553m）热带，气温比滇西北高10℃+，注意穿衣减负</div>
+    <div class="kv planb"><b>🔀 Plan B</b>机票贵改昆明→版纳高铁（约3h）；到得晚改第二天上午飞</div>
+    <div class="kv wide">🏨 告庄西双景内傣式客栈/连锁（约¥300–400/晚），近星光夜市</div>
+    <div class="kv wide">🍜 晚餐：傣味手抓饭（人均¥50–70）+ 香茅草烤鱼；星光夜市热带水果、舂鸡脚</div>
+  </div>
+  <a class="navbtn" target="_blank" rel="noopener" href="https://uri.amap.com/marker?position=100.82,22.03&name=西双版纳告庄西双景">一键导航</a>
+</section>
+
+<section class="day" id="day11">
+  <div class="dayhead">
+    <span class="daynum">Day 11</span>
+    <span class="badge">🚗 当地包车/自驾</span>
+  </div>
+  <h2 class="daytitle">中科院热带植物园一日</h2>
+  <div class="metaline"><i data-lucide="clock"></i>09:00 景洪出发 → 约10:00 抵达勐仑植物园（自驾/包车约70km/1h）</div>
+  <div class="metaline"><i data-lucide="map-pin"></i>景洪 → 中科院西双版纳热带植物园（勐仑）→ 返告庄</div>
+  <div class="mapwrap"><div class="mapcap">📍 高德地图 · 中科院热带植物园</div><iframe loading="lazy" src="https://uri.amap.com/marker?position=101.26,21.93&name=中科院热带植物园" style="width:100%;height:300px;border:0;border-radius:14px;"></iframe></div>
+  <button class="spotbtn" onclick="toggleSpot(this)">展开详细攻略</button><div class="spot"><h4>中科院西双版纳热带植物园</h4><p><b>深度看点：</b>中国面积最大、物种最丰富的热带植物园，王莲池、绞杀榕、奇花异卉，罗梭江环绕。</p><p><b>📷 拍照打卡点：</b>王莲池（夏季王莲可载人）、望天树、棕榈园</p><p><b>🍜 周边美食：</b>傣味烧烤、舂鸡脚、热带水果</p><p><b>🗺 游览动线：</b>景洪→勐仑（1h）→西区植物园→王莲池→返告庄</p></div>
+  <div class="imgs"><figure><img src="https://pixabay.com/get/g9c0ee069a3234c08114d8826ae520f6bd18191e21df8ca92a8610d93caf40d9891ea497e6818f7f155777a503655bfb18ae3db22b8160b6bce1cab5686f7216b_1280.jpg" alt="热带雨林" loading="lazy" width="1000"><small>图源 <a href="https://pixabay.com/photos/forest-jungle-tropical-green-6761846/" target="_blank">hasogr@Pixabay</a></small></figure></div>
+  <div class="gride2">
+    <div class="kv"><b>路况</b>G214/勐仑段柏油路，路况好；园内面积大需电瓶车</div>
+    <div class="kv"><b>补给</b>植物园门口有餐吧；园区大建议自备水</div>
+    <div class="kv warn"><b>⚠️ 坑点</b>门票约¥75（西区，学生半价）；勐仑景区旺季提前1天预约</div>
+    <div class="kv planb"><b>🔀 Plan B</b>时间紧可改野象谷（约¥60）看亚洲象；体力有限只逛西区</div>
+    <div class="kv wide">🏨 续住告庄西双景（¥300–400/晚）</div>
+    <div class="kv wide">🍜 午餐园内简餐；晚餐傣味烧烤+青芒果</div>
+  </div>
+  <a class="navbtn" target="_blank" rel="noopener" href="https://uri.amap.com/marker?position=101.26,21.93&name=中科院热带植物园">一键导航</a>
+</section>
+
+<section class="day" id="day12">
+  <div class="dayhead">
+    <span class="daynum">Day 12</span>
+    <span class="badge">✈️ 飞机返程</span>
+  </div>
+  <h2 class="daytitle">西双版纳 → 北京 · 归途</h2>
+  <div class="metaline"><i data-lucide="clock"></i>09:00 曼听公园/傣族园 → 下午15:00 版纳直飞北京（约3.5h，¥600–1200）</div>
+  <div class="metaline"><i data-lucide="map-pin"></i>景洪 → 曼听公园 → 返程机场 → 北京</div>
+  <div class="mapwrap"><div class="mapcap">📍 高德地图 · 西双版纳景洪</div><iframe loading="lazy" src="https://uri.amap.com/marker?position=100.80,22.01&name=西双版纳景洪" style="width:100%;height:300px;border:0;border-radius:14px;"></iframe></div>
+  <button class="spotbtn" onclick="toggleSpot(this)">展开详细攻略</button><div class="spot"><h4>曼听公园·傣族园</h4><p><b>深度看点：</b>曼听公园为傣王御花园（门票约¥40），傣族园可体验泼水节（约¥45）。</p><p><b>📷 拍照打卡点：</b>曼听白塔、孔雀园、傣族园金塔</p><p><b>🍜 周边美食：</b>傣味米线、烤鸡、热带水果</p><p><b>🗺 游览动线：</b>景洪→曼听公园→傣族园（可选）→机场→返京</p></div>
+  <div class="imgs"><figure><img src="https://images.pexels.com/photos/14441379/pexels-photo-14441379.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940" alt="告庄夜市" loading="lazy" width="1000"><small>图源 <a href="https://www.pexels.com/photo/illuminated-tower-in-city-in-asia-14441379/" target="_blank">Nshcvks Hxjsg@Pexels</a></small></figure></div>
+  <div class="gride2">
+    <div class="kv"><b>路况</b>曼听公园/傣族园在景洪市区周边，打车便捷</div>
+    <div class="kv"><b>补给</b>返程航班含托运行李建议选全服务航司；机场免税少量</div>
+    <div class="kv warn"><b>⚠️ 坑点</b>直飞北京班次少、价格波动大，建议提前2-3周购票；12点前退房</div>
+    <div class="kv planb"><b>🔀 Plan B</b>无直飞改版纳→昆明→北京中转；多留1天可加野象谷</div>
+    <div class="kv wide">🏨 返程无住宿（12:00退房）</div>
+    <div class="kv wide">🍜 早餐傣味米线；午餐曼听公园周边傣餐</div>
+  </div>
+  <a class="navbtn" target="_blank" rel="noopener" href="https://uri.amap.com/marker?position=100.80,22.01&name=西双版纳景洪">一键导航</a>
+</section>
+
+
+  <div class="appendix">
+    <h3>附录 · 应急与花费预估</h3>
+    <ul>
+      <li><b>救援电话：</b>全国统一 120（急救）/ 110（报警）；云南旅游投诉 12301；迪庆高反救援 0887-8232533（普达措官方热线）。</li>
+      <li><b>医院：</b>昆明市第一人民医院（市区）；丽江玉龙县人民医院；香格里拉州人民医院（应对高反）。</li>
+      <li><b>花费预估（人均，不含购物）：</b>往返大交通 ¥1200–2500 · 住宿 11 晚 ¥3400（300–400/晚）· 滇西环线租车+油费 ¥1500–2200（2人分摊）· 门票约 ¥700 · 餐饮 ¥1500–1800。数据获取时间 2026-11-15。</li>
+      <li><b>全局兜底 Plan B：</b>高反严重立即整体缩短，砍掉香格里拉改丽江+大理慢游；版纳段可独立成行（不爬山），适合全家老小。</li>
+    </ul>
+    <div class="srcnote">
+      本路书生成于 <b>2026-11-15</b>，易变信息基于该时刻实时数据并标注来源：机票/高铁（同程·携程·12306，2026-11）、门票与预约规则（各景区官方小程序/普达措官方站 2026-11-15）、路况（云南交警）。<br>
+      徽标说明：<span style="color:var(--good)">🟢 实时</span> = 已实时核验（含来源）；<span style="color:var(--t2)">⚪ 估算</span> = 模型推测，请出行前二次确认。海拔剖面真实数据待接入，以官方资料为准。仅供参考，请以当地最新政策为准。
+    </div>
+  </div>
+  <p class="ts">AIGC 生成 · 路线示意非真实轨迹比例，请以高德实时导航为准</p>
+</div>
+
+<script src="https://registry.npmmirror.com/lucide/1.28.0/files/dist/umd/lucide.min.js"></script>
+<script>
+lucide.createIcons();
+function toggleSpot(btn){
+  var sp=btn.nextElementSibling;
+  var open=sp.classList.toggle('open');
+  btn.textContent=open?'收起详细攻略':'展开详细攻略';
+}
+/* 锚点导航高亮 */
+var navLinks=document.querySelectorAll('.nav-links a');
+var sections=[];
+for(var i=0;i<navLinks.length;i++){
+  var href=navLinks[i].getAttribute('href');
+  if(href)sections.push(document.getElementById(href.replace('#','')));
+}
+function updateNav(){
+  var navH=document.querySelector('nav.top').offsetHeight;
+  var vh=window.innerHeight;
+  var cur=0,best=-1;
+  for(var j=0;j<sections.length;j++){
+    if(!sections[j])continue;
+    var r=sections[j].getBoundingClientRect();
+    var vt=Math.max(r.top,navH);
+    var vb=Math.min(r.bottom,vh);
+    var v=Math.max(0,vb-vt);
+    if(v>best){best=v;cur=j;}
+  }
+  for(var k=0;k<navLinks.length;k++)navLinks[k].classList.toggle('active',k===cur);
+}
+window.addEventListener('scroll',updateNav,{passive:true});
+window.addEventListener('resize',updateNav,{passive:true});
+updateNav();
+</script>
+
+<script>(function(){
+var d=document,b=d.body;if(!b)return;
+var old=b.querySelectorAll('[data-aigc-mark],#__xas_aigc_watermark__');
+for(var k=0;k<old.length;k++)old[k].parentNode&&old[k].parentNode.removeChild(old[k]);
+var f=d.createElement("div");
+f.id="__xas_aigc_watermark__";
+f.setAttribute("data-aigc-mark","true");
+f.style.cssText="position:fixed;bottom:8px;right:12px;z-index:2147483647;font-size:11px;padding:3px 7px;font-family:system-ui,sans-serif;pointer-events:none;color:rgba(30,30,30,0.6);background:rgba(255,255,255,0.4);border:0.5px solid rgba(0,0,0,0.08);border-radius:4px;line-height:1.4;backdrop-filter:blur(8px);";
+var paths=["M14.0072 26.6377C14.2318 25.9475 13.3696 25.4389 12.8659 25.9611C9.56694 29.3941 6.9736 33.4696 5.35587 37.9788C-0.86998 55.1279 7.72006 74.1728 24.7867 80.6891C33.1499 83.8815 41.0252 82.7894 44.7212 81.8812C54.0056 79.6016 63.1537 72.4609 66.7114 63.4447C67.1039 62.4525 66.6252 61.3286 65.6404 60.9222C63.78 60.1548 61.9263 59.3896 60.3721 58.7471C59.46 58.3702 58.4117 58.7402 57.9398 59.6076C56.4287 62.3753 54.8496 65.0568 52.4945 67.2274C46.0349 73.5893 36.1675 75.8621 27.5956 72.9036C14.6833 68.6487 7.76998 54.5307 12.124 41.7683C12.3668 41.0553 12.4916 40.3038 12.4621 39.55C12.242 33.8125 12.8228 30.2955 14.0072 26.6377Z","M73.6785 14.313C74.3682 14.5378 74.8765 13.675 74.3546 13.171C70.9241 9.86968 66.8514 7.27451 62.3454 5.65564C45.2084 -0.574603 26.1769 8.0215 19.6651 25.1002C16.4751 33.4692 17.5664 41.3501 18.474 45.0488C20.7519 54.3396 27.8876 63.4943 36.8974 67.0544C37.8889 67.4472 39.012 66.9681 39.4182 65.9827C40.185 64.1209 40.9497 62.2659 41.5918 60.7107C41.9684 59.7979 41.5986 58.7489 40.7318 58.2767C37.9661 56.7645 35.2865 55.1843 33.1174 52.8275C26.76 46.3634 24.4888 36.489 27.4452 27.9111C31.6971 14.9897 45.8051 8.07145 58.5586 12.4285C59.271 12.6715 60.022 12.7964 60.7753 12.7668C66.5088 12.5466 70.0233 13.1278 73.6785 14.313Z","M85.9922 73.9549C85.7676 74.6451 86.6298 75.1537 87.1335 74.6315C90.4324 71.1985 93.0258 67.123 94.6435 62.6138C100.869 45.4647 92.2793 26.4198 75.2127 19.9035C66.8495 16.7111 58.9742 17.8033 55.2782 18.7114C45.9938 20.991 36.8456 28.1317 33.288 37.1479C32.8955 38.1401 33.3742 39.264 34.3589 39.6704C36.2194 40.4378 38.0731 41.203 39.6273 41.8455C40.5394 42.2224 41.5876 41.8524 42.0596 40.985C43.5706 38.2173 45.1498 35.5358 47.5049 33.3652C53.9645 27.0033 63.8319 24.7305 72.4038 27.689C85.3161 31.9439 92.2294 46.0619 87.8754 58.8243C87.6326 59.5373 87.5078 60.2888 87.5373 61.0426C87.7574 66.7801 87.1766 70.2971 85.9922 73.9549Z","M26.2674 86.2849C25.5777 86.0601 25.0694 86.9229 25.5913 87.4269C29.0219 90.7282 33.0945 93.3234 37.6028 94.9423C54.7398 101.173 73.7713 92.5764 80.2831 75.4977C83.4731 67.1287 82.3818 59.2478 81.4742 55.5491C79.1963 46.2583 72.0606 37.1036 63.0508 33.5435C62.0593 33.1507 60.9362 33.6298 60.53 34.6152C59.7632 36.477 58.9985 38.3297 58.3564 39.885C57.9798 40.7977 58.3496 41.8467 59.2163 42.3212C61.9821 43.8334 64.6617 45.4114 66.8285 47.7704C73.1859 54.2345 75.4571 64.1089 72.5007 72.6869C68.2488 85.6082 54.1408 92.5265 41.3874 88.1694C40.6749 87.9264 39.9239 87.8015 39.1706 87.8311C33.4371 88.0513 29.9226 87.4701 26.2674 86.2826V86.2849Z"];
+b.appendChild(f);
+var svg='<svg width="14" height="14" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg" style="display:inline;vertical-align:-2px;margin:0 4px">';
+for(var i=0;i<paths.length;i++)svg+='<path d="'+paths[i]+'" fill="rgba(30,30,30,0.5)"/>';
+svg+="</svg>";
+f.innerHTML="本页面由"+svg+"超级小爱AI生成";
+})();</script>
+</body>
+</html>
